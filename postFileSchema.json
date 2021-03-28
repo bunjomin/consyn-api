@@ -1,0 +1,27 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title" : "Post File Schema",
+	"type" : "object",
+	"properties": {
+		"cid": {
+			"description": "An IPFS multihash",
+			"type": "string"
+		},
+		"name": {
+			"description": "File name",
+			"type": "string"
+		},
+		"extension": {
+			"description": "File extension",
+			"type": "string"
+		},
+		"mimeType": {
+			"description": "MIME type of the file",
+			"type": "string"
+		},
+		"key": {
+			"description": "Encryption string for the file",
+			"type": "string"
+		}
+	}
+}

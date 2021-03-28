@@ -1,0 +1,65 @@
+org: bunjomin
+app: consyn
+service: api
+
+frameworkVersion: '2'
+
+useDotenv: true
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  logs:
+    restApi: true
+    httpApi: true
+  environment:
+    NODE_ENV: ${param:NODE_ENV, env:NODE_ENV}
+    MYSQL_USER: ${param:MYSQL_USER, env:MYSQL_USER}
+    MYSQL_PASSWORD: ${param:MYSQL_PASSWORD, env:MYSQL_PASSWORD}
+    MYSQL_HOST: ${param:MYSQL_HOST, env:MYSQL_HOST}
+    MYSQL_PORT: ${param:MYSQL_PORT, env:MYSQL_PORT}
+    MYSQL_DATABASE: ${param:MYSQL_DATABASE, env:MYSQL_DATABASE}
+    DEBUG: ${param:DEBUG, env:DEBUG}
+
+functions:
+  postKey:
+    handler: keys.handler
+    events:
+      - http:
+          path: keys
+          method: post
+          cors: true
+  postFile:
+    handler: postFiles.handler
+    events:
+      - http:
+          path: files
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(postFileSchema.json)}
+  getFile:
+    handler: getFiles.handler
+    events:
+      - http:
+          path: files/{fileHash}
+          method: get
+          cors: true
+          request:
+            parameters:
+              paths:
+                fileHash: true
+
+custom:
+  bundle:
+    copyFiles:
+      - from: 'sql'
+        to: './sql/'
+    externals:
+      - ipfs

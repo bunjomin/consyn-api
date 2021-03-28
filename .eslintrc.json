@@ -1,0 +1,101 @@
+{
+	"env": {
+		"commonjs": true,
+		"es6": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:vue/vue3-recommended"
+	],
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly",
+		"mp": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 2020,
+		"sourceType": "module"
+	},
+	"ignorePatterns": [
+		"node_modules",
+		".webpack",
+		".serverless"
+	],
+	"rules": {
+		"indent": [
+			"error",
+			"tab",
+			{
+				"SwitchCase": 1
+			}
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"error",
+			"single"
+		],
+		"semi": [
+			"error",
+			"always"
+		],
+		"brace-style": [
+			"error",
+			"1tbs"
+		],
+		"eol-last": [
+			"error",
+			"always"
+		],
+		"no-trailing-spaces": "error",
+		"no-multiple-empty-lines": [
+			"error",
+			{
+				"max": 2,
+				"maxEOF": 1
+			}
+		],
+		"one-var": [
+			"error",
+			"never"
+		],
+		"one-var-declaration-per-line": [
+			"error",
+			"always"
+		],
+		"no-extend-native": [
+			"error"
+		],
+		"object-curly-spacing": [
+			"error",
+			"always"
+		],
+		"object-curly-newline": [
+			"error",
+			{
+				"ObjectPattern": {
+					"multiline": true
+				},
+				"ImportDeclaration": "never",
+				"ExportDeclaration": {
+					"multiline": true,
+					"minProperties": 3
+				},
+				"ObjectExpression": {
+					"multiline": true,
+					"minProperties": 3
+				}
+			}
+		],
+		"object-property-newline": [
+			"error"
+		],
+		"padded-blocks": [
+			"error",
+			"never"
+		]
+	}
+}
