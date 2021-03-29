@@ -34,7 +34,7 @@ async function getFiles(req, res) {
 		const secret = await Secret.getByID(hash.secretId);
 		debug('secret %O', secret);
 	
-		const returner = { key: secret.value, cid: hash.value, name: file.name, extension: file.extension, mimeType: mime.description };
+		const returner = { key: secret.value, cid: hash.value, name: file.name, extension: file.extension, size: file.size, mimeType: mime.description };
 		debug('returner %O', returner);
 
 		return res.status(200).send(returner);

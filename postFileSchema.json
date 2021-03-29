@@ -15,6 +15,10 @@
 			"description": "File extension",
 			"type": "string"
 		},
+		"size": {
+			"description": "File size",
+			"type": "number"
+		},
 		"mimeType": {
 			"description": "MIME type of the file",
 			"type": "string"

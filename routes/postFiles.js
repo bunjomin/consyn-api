@@ -28,7 +28,7 @@ async function postFile(req, res) {
 	
 		const validationErrors = [];
 	
-		for (const key of ['cid', 'name', 'extension', 'mimeType', 'key']) {
+		for (const key of ['cid', 'name', 'extension', 'size', 'mimeType', 'key']) {
 			if (!keys.includes(key)) {
 				validationErrors.push({
 					id,
@@ -43,7 +43,7 @@ async function postFile(req, res) {
 			return res.status(400).send({ errors: validationErrors });
 		}
 	
-		const { cid, name, extension, mimeType, key } = body;
+		const { cid, name, extension, size, mimeType, key } = body;
 	
 		const secret = await Secret.getByValue(key);
 		debug('secret %O', secret);
@@ -90,7 +90,10 @@ async function postFile(req, res) {
 		const hash = await Hash.create({ active: true, value: cid, secretId: secret.id });
 		debug('hash %O', hash);
 	
-		const file = await File.create({ active: true, name, extension, hashId: hash.id, mimeId: mime.id });
+		const filePayload = { active: true, name, extension, size, hashId: hash.id, mimeId: mime.id };
+		debug('filePayload %O', filePayload);
+
+		const file = await File.create(filePayload);
 		debug('file %O', file);
 	
 		const returner = {
